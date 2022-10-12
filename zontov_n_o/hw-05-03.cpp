@@ -11,21 +11,24 @@ int factorial(double n){
     return res;
 }
 
-void solve()
-{
-    double a = 0;
-    double b = 1.0;
-    double step = 0.1;
+double sequenseSum(double x) {
     double epsilon = 0.0001;
     double rs = 0.0;
+    for (int i = 0; ; i += 1) {
+        double step = std::pow(2 * x, i) / factorial(i);
+        if (std::abs(step) < epsilon) break;
+        rs += step;
+    }
+    return rs;
+}
 
+void solve()
+{
     std::cout << " x | s(x) | f(x) "<< std::endl;
-    for (double x = a, i = 0; x <= b; x += step, i += 1) {
-        double s = std::pow(2 * x, i) / factorial(i);
+    for (double x = 0; x <= 1.0; x += 0.1) {
+        double s = sequenseSum(x);
         double y = std::pow(std::exp(1.0), 2 * x);
-        if (std::abs(s) < epsilon) break;
-        rs += s;
-        std::cout << x << " | " << rs << " | " << y << std::endl;
+        std::cout << std::fixed << x << " | " << s << " | " << y << std::endl;
     }
 }
 
